@@ -1,0 +1,27 @@
+{
+  "name": "manage-clients",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3004",
+    "build": "next build",
+    "start": "next start --port 3004"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.111.0",
+    "html5-qrcode": "^2.3.8",
+    "next": "^16.3.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "resend": "^6.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": "24.15.0"
+  }
+}

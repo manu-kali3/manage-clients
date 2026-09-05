@@ -15,14 +15,11 @@ export default function AdminShell({ title, subtitle, children }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const onDashboard = pathname === "/";
-  const onEvents = pathname.startsWith("/events");
   const onProjects = pathname.startsWith("/projects");
   const onSettings = pathname.startsWith("/settings");
   const onSecurity = pathname.startsWith("/security");
   const onClients = pathname.startsWith("/clients");
-  const onBookings = pathname.startsWith("/bookings");
   const onSubscribers = pathname.startsWith("/subscribers");
-  const onScan = pathname.startsWith("/scan");
   const onUsers = pathname.startsWith("/users");
 
   async function handleLogout() {
@@ -48,18 +45,6 @@ export default function AdminShell({ title, subtitle, children }: Props) {
           <a className={`nav-link ${onDashboard ? "active" : ""}`} href="/">
             <span className="nav-icon">{Icons.dashboard}</span>
             <span className="nav-label-text">Dashboard</span>
-          </a>
-          <a className={`nav-link ${onEvents ? "active" : ""}`} href="/events">
-            <span className="nav-icon">{Icons.calendar}</span>
-            <span className="nav-label-text">Events</span>
-          </a>
-          <a className={`nav-link ${onBookings ? "active" : ""}`} href="/bookings">
-            <span className="nav-icon">{Icons.ticket}</span>
-            <span className="nav-label-text">Bookings</span>
-          </a>
-          <a className={`nav-link ${onScan ? "active" : ""}`} href="/scan">
-            <span className="nav-icon">{Icons.scan}</span>
-            <span className="nav-label-text">Scan tickets</span>
           </a>
           <a className={`nav-link ${onClients ? "active" : ""}`} href="/clients">
             <span className="nav-icon">{Icons.users}</span>

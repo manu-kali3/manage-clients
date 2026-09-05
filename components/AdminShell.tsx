@@ -16,11 +16,8 @@ export default function AdminShell({ title, subtitle, children }: Props) {
   const router = useRouter();
   const onDashboard = pathname === "/";
   const onProjects = pathname.startsWith("/projects");
-  const onSettings = pathname.startsWith("/settings");
   const onSecurity = pathname.startsWith("/security");
   const onClients = pathname.startsWith("/clients");
-  const onSubscribers = pathname.startsWith("/subscribers");
-  const onUsers = pathname.startsWith("/users");
 
   async function handleLogout() {
     await fetch("/api/logout", { method: "POST" });
@@ -50,21 +47,9 @@ export default function AdminShell({ title, subtitle, children }: Props) {
             <span className="nav-icon">{Icons.users}</span>
             <span className="nav-label-text">Clients</span>
           </a>
-          <a className={`nav-link ${onUsers ? "active" : ""}`} href="/users">
-            <span className="nav-icon">{Icons.users}</span>
-            <span className="nav-label-text">Users</span>
-          </a>
-          <a className={`nav-link ${onSubscribers ? "active" : ""}`} href="/subscribers">
-            <span className="nav-icon">{Icons.mail}</span>
-            <span className="nav-label-text">Subscribers</span>
-          </a>
           <a className={`nav-link ${onProjects ? "active" : ""}`} href="/projects">
             <span className="nav-icon">{Icons.image}</span>
             <span className="nav-label-text">Projects</span>
-          </a>
-          <a className={`nav-link ${onSettings ? "active" : ""}`} href="/settings">
-            <span className="nav-icon">{Icons.settings}</span>
-            <span className="nav-label-text">Site Images</span>
           </a>
           <a className={`nav-link ${onSecurity ? "active" : ""}`} href="/security">
             <span className="nav-icon">{Icons.lock}</span>

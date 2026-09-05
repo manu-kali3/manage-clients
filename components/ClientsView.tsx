@@ -20,6 +20,7 @@ export default function ClientsView({ initialClients, initialTotal, dbError }: {
   const filtered = useMemo(() => {
     const q = filter.toLowerCase().trim();
     return initialClients.filter((c) => {
+      if (c.bookings.length === 0) return false;
       if (statusFilter !== "all") {
         if (!c.bookings.some((b) => b.status === statusFilter)) return false;
       }
@@ -97,10 +98,10 @@ export default function ClientsView({ initialClients, initialTotal, dbError }: {
       {dbError && <div className="banner error">Database: {dbError}</div>}
       {toast && <div className="toast ok">{toast}</div>}
       <div className="stats" style={{ marginBottom: 24 }}>
-        <div className="stat-card"><div className="stat-icon green">👥</div><div><div className="stat-value">{initialTotal}</div><div className="stat-label">Total clients</div></div></div>
-        <div className="stat-card"><div className="stat-icon navy">📋</div><div><div className="stat-value">{initialClients.reduce((n, c) => n + c.bookings.length, 0)}</div><div className="stat-label">Bookings</div></div></div>
-        <div className="stat-card"><div className="stat-icon orange">💬</div><div><div className="stat-value">{initialClients.reduce((n, c) => n + c.bookings.reduce((a, b) => a + b.comments.length, 0), 0)}</div><div className="stat-label">Comments</div></div></div>
-        <div className="stat-card"><div className="stat-icon navy">⏳</div><div><div className="stat-value">{initialClients.reduce((n, c) => n + c.bookings.filter((b) => b.status === "pending").length, 0)}</div><div className="stat-label">Pending</div></div></div>
+        <div className="stat-card"><div className="stat-icon green">C</div><div><div className="stat-value">{initialClients.filter((c) => c.bookings.length > 0).length}</div><div className="stat-label">Clients with deals</div></div></div>
+        <div className="stat-card"><div className="stat-icon navy">B</div><div><div className="stat-value">{initialClients.reduce((n, c) => n + c.bookings.length, 0)}</div><div className="stat-label">Bookings</div></div></div>
+        <div className="stat-card"><div className="stat-icon orange">M</div><div><div className="stat-value">{initialClients.reduce((n, c) => n + c.bookings.reduce((a, b) => a + b.comments.length, 0), 0)}</div><div className="stat-label">Messages</div></div></div>
+        <div className="stat-card"><div className="stat-icon navy">P</div><div><div className="stat-value">{initialClients.reduce((n, c) => n + c.bookings.filter((b) => b.status === "pending").length, 0)}</div><div className="stat-label">Pending</div></div></div>
       </div>
 
       <div className="card">
@@ -124,12 +125,12 @@ export default function ClientsView({ initialClients, initialTotal, dbError }: {
                 <div style={{ flex: 1, minWidth: 260 }}>
                   <div style={{ fontWeight: 700, fontSize: 15 }}>{c.name ?? "—"} <span style={{ fontWeight: 400, color: "var(--color-muted)", fontSize: 13 }}>{c.email}</span></div>
                   <div style={{ fontSize: 12.5, color: "var(--color-muted)", marginTop: 4, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    <span>📱 {c.phone ?? "—"} {c.secondary_phone ? `/ ${c.secondary_phone}` : ""}</span>
-                    <span>✉️ {c.secondary_email ?? "—"}</span>
-                    <span>📍 {c.location ?? "—"}</span>
-                    <span>🏢 {c.org_type ?? "—"}</span>
-                    <span>⚧ {c.gender ?? "—"}</span>
-                    <span>🎂 {c.dob ? new Date(c.dob).toLocaleDateString() : "—"}</span>
+                    <span>Phone: {c.phone ?? "—"} {c.secondary_phone ? `/ ${c.secondary_phone}` : ""}</span>
+                    <span>Email2: {c.secondary_email ?? "—"}</span>
+                    <span>Location: {c.location ?? "—"}</span>
+                    <span>Org: {c.org_type ?? "—"}</span>
+                    <span>Gender: {c.gender ?? "—"}</span>
+                    <span>DOB: {c.dob ? new Date(c.dob).toLocaleDateString() : "—"}</span>
                   </div>
                   <div style={{ fontSize: 12.5, color: "var(--color-muted)", marginTop: 4, display: "flex", gap: 10, flexWrap: "wrap" }}>
                     <span>Referral: {c.referral_source ?? "—"}</span>

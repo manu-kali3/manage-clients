@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { OfflineBanner, MaintenanceBanner } from "@/components/SystemStatus";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,9 +19,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const dbDown = !process.env.SUPABASE_URL;
   return (
     <html lang="en">
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <OfflineBanner />
+        <MaintenanceBanner isDown={dbDown} />
+        {children}</body>
     </html>
   );
 }

@@ -19,7 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const dbDown = !process.env.SUPABASE_URL;
+  const dbDown = !process.env.SUPABASE_URL && !process.env.NEXT_PUBLIC_SUPABASE_URL;
   return (
     <html lang="en">
       <body className={inter.variable}>

@@ -6,6 +6,7 @@ const IS_DEV = process.env.NODE_ENV === "development";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  turbopack: { root: process.cwd() },
   async headers() {
     return [
       {
